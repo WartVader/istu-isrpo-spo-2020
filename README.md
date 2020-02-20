@@ -1,2 +1,2 @@
 # istu-isrpo-spo-2020
-Практикум по ИСРПО
+* [T01. Генерация программ](https://github.com/Nordth/istu-isrpo-spo-2020/blob/master/task01.md)
