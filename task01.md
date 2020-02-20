@@ -44,6 +44,12 @@
 > my_generator.exe input.json results/folder serve
 ```
 
+Или в случае Node.js:
+
+```
+> node my_generator.js input.json results/folder serve
+```
+
 ## 3. Автопубликация
 
 Создайте новый репозиторий на GitHub (или аналогичном сервисе). Настойте GitHub Pages, чтобы заданная папка репозитория публиковалась в виде веб-сайта
