@@ -180,12 +180,12 @@
      ],
      "data": [
        {
-		   "id": 1,
+	   "id": 1,
            "created_at": "2020-02-05T09:04:00",
            "mode": "deathmatch"
        },
        {
-		   "id": 2,
+	   "id": 2,
            "created_at": "2020-01-03T10:06:00",
            "mode": "team"
        }
@@ -209,37 +209,37 @@
      ],
      "data": [
         {
-		   "id": 1,
+	   "id": 1,
            "player_id": 1,
            "game_id": 1,
            "is_winner": true
         },
         {
-		   "id": 2,
+	   "id": 2,
            "player_id": 2,
            "game_id": 1,
            "is_winner": false
         },
         {
-		   "id": 3,
+	   "id": 3,
            "player_id": 1,
            "game_id": 2,
            "is_winner": true
         },
         {
-		   "id": 4,
+	   "id": 4,
            "player_id": 2,
            "game_id": 2,
            "is_winner": false
         },
         {
-		   "id": 5,
+	   "id": 5,
            "player_id": 3,
            "game_id": 2,
            "is_winner": false
         },
         {
-		   "id": 6,
+	   "id": 6,
            "player_id": 4,
            "game_id": 2,
            "is_winner": true
@@ -277,3 +277,5 @@ Id | player_id | game_id | is_winner | Действие
 5|  3 | 2 | false| -
 6|  4 | 2 | true | -
 ~~7~~| ~~1~~ | ~~2~~ | ~~false~~ | __DELETE__
+
+Как и прежде, обновление БД должно происходить в одной транзакции
