@@ -81,7 +81,7 @@
         },
         {
            "name": "is_winner",
-           "link": "bool"
+           "type": "bool"
         }
      ]
   }
@@ -204,7 +204,7 @@
         },
         {
            "name": "is_winner",
-           "link": "bool"
+           "type": "bool"
         }
      ],
      "data": [
