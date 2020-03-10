@@ -124,5 +124,88 @@ body {
 </html>
 ```
 
-
 Минифицировать CSS не нужно
+
+
+## 3. Рекурсивное включение CSS-файлов
+
+Если подключенный CSS-файл содержит `@import` другого файла, то вам нужно его так же включить внутрь HTML-файла по тем же правилам. Например, пусть в предыдущем примере:
+
+Структура файлов:
+```
+index.html <- входной файл
+css/
+ |- main.css
+ |- theme.css
+lib/
+ |- lib.css
+ |- point.png
+images/
+ |- bg.jpg
+```
+
+
+Файл `/css/theme.css`:
+
+```
+@import '../lib/lib.css'
+
+a {
+  color: green
+}
+```
+
+Файл `/lib/lib.css`:
+
+```
+a:before{
+  content: "";
+  display: inline-block;
+  background: url('point.png');
+  width: 20px;
+  height: 20px;
+}
+```
+
+Тогда выходной файл будет следующим:
+
+```
+<!doctype html>
+<html>
+<head>
+<title>Hello World!</title>
+<style>
+a:before{
+  content: "";
+  display: inline-block;
+  background: url('/lib/point.png');
+  width: 20px;
+  height: 20px;
+}
+
+a {
+  color: green
+}
+
+body {
+  color: red;
+  background: url('/images/bg.jpg')
+}
+</style>
+<link rel="shortcut icon" href="/favicon.png" type="image/png">
+</head>
+<body>
+<a href="/index.html">Главная</a> <h1> Котёнок по имени Гав </h1>
+<pre>
+        На чердаке жил котёнок по имени Гав. Он был рыжий. 
+        
+        Когда соседский кот узнал, что рыжего котёнка зовут Гав, он почесал спинку о трубу соседского дома и сказал:
+        
+         — Я бы не советовал котёнку с таким именем спускаться во двор. Во дворе котёнка с таким именем ждут одни неприятности.   
+     </pre>
+<p>
+Котёнок Гав услышал и подумал: «Что это за неприятности и зачем они меня ждут?». Гав сейчас же спустился во двор и внимательно осмотрел все закоулки — нигде никаких неприятностей не было.
+</p>
+</body>
+</html>
+```
