@@ -1,11 +1,12 @@
-const paramJSON = process.argv[2];
+const fs = require("fs");
+const JSONPath = __dirname + "\\tmp\\";
+const questPath = __dirname + "\\quest\\";
+console.log(__dirname)
+
+const paramJSON = JSONPath + process.argv[2];
 const paramPath = process.argv[3];
 const paramServe = process.argv[4];
 
-
-const fs = require("fs");
-const _dirname = "C:\\Users\\WartVader\\Desktop\\Tasks 2020\\1\\quest\\";
-const JSONPath = "C:\\Users\\WartVader\\Desktop\\Tasks 2020\\1\\tmp\\";
 const htmlwb4_start = '<!doctype html>' + '\n' +
 '<html lang="rus">' + '\n' +
   '<head>' + '\n' +
@@ -35,18 +36,24 @@ var json = JSON.parse(fs.readFileSync(JSONPath + "quest.json", "utf8"));
 var logJSON = JSON.parse(fs.readFileSync(JSONPath + "log.json", "utf8"));
 //console.log(json);
 
-function DataGenerator(id)
+function DataGenerator(id, datajson)
 {
     let i = 0;
     let data = '';
-    while(i < json[id].answers.length)
+    console.log(datajson)
+    console.log(datajson[0].id, json.length);
+    if (datajson[0].id != json.length)
     {
-        if(i == 0)
-        data += '<div><a href=".\\quest\\quest' + (json[id].id + 1) + '.html' + '">' + json[id].answers[i].text + '</a></div>' + '\n';
-        else
-        data += '<div><a href=".\\quest\\the-end' + json[id].id + '.html">' + json[id].answers[i].text + '</a></div>' + '\n';
-
-        i++;
+        while(i < datajson[0].answers.length)
+        {
+            if(i == 0)
+            data += '<div><a href=".\\quest\\quest' + (datajson[0].id + 1) + '.html' + '">' + datajson[0].answers[i].text + '</a></div>' + '\n';
+            else
+            data += '<div><a href=".\\quest\\the-end' + datajson[0].id + '.html">' + datajson[0].answers[i].text + '</a></div>' + '\n';
+    
+            i++;
+        }
+    
     }
     
     return data;
@@ -54,19 +61,23 @@ function DataGenerator(id)
 
 function HTMLGenerator(id, jsonData)
 {
-    let title = "<div>" + json[id].question + "</div>";
+    console.log("id =", id, json)
+    let data1 = findByID(id, json);
+    if (data1[0] == false)
+    return false;
     let data;
-    if(id != json.length - 1)
-        data = DataGenerator(id);
-    let fp = _dirname + "quest" + json[id].id + ".html"; //file path
+    let title = "<div>" + data + "</div>";
+    if(id != json.length)
+        data = DataGenerator(id, data1);
+    let fp = questPath + "quest" + data1[0].id + ".html"; //file path
     let file = htmlwb4_start + title + data + htmlwb4_end;
     fs.writeFile(fp, file, (err) => {
         if(err) throw err;
         console.log('Data has been added!');
     });
-    if(id != json.length - 1)
+    if(id != json.length)
     {
-        fp = _dirname + "the-end" + json[id].id + ".html"; //file path
+        fp = questPath + "\\the-end" + data1[0].id + ".html"; //file path
         title = "<div>" + json[id].end + "</div>";
         file = htmlwb4_start + title + htmlwb4_end;
         fs.writeFile(fp, file, (err) => {
@@ -147,6 +158,7 @@ fs.stat(paramJSON, function(err, stats) {
     {
         logJSON[0].mtime = mtime;
         logJSON[0].mid = [];
+        console.log("modificate");
         Modificate();
     }
     else 
