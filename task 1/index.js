@@ -1,11 +1,24 @@
 const fs = require("fs");
 const JSONPath = __dirname + "\\tmp\\";
-const questPath = __dirname + "\\quest\\";
-console.log(__dirname)
+const questPath =  "\\quest\\";
+console.log(__dirname);
 
 const paramJSON = JSONPath + process.argv[2];
-const paramPath = process.argv[3];
+var paramPath = process.argv[3];
+var fullParamPath = __dirname + "\\" + paramPath;
 const paramServe = process.argv[4];
+
+if (paramPath == undefined || paramPath == 'false')
+{
+    paramPath = questPath;
+    fullParamPath = __dirname + "\\" + questPath;
+}
+else
+{
+    fs.mkdir(fullParamPath, function() {});
+}
+console.log(fullParamPath);
+
 
 const htmlwb4_start = '<!doctype html>' + '\n' +
 '<html lang="rus">' + '\n' +
@@ -40,7 +53,7 @@ function DataGenerator(id, datajson)
 {
     let i = 0;
     let data = '';
-    console.log(datajson)
+    console.log(datajson);
     console.log(datajson[0].id, json.length);
     if (datajson[0].id != json.length)
     {
@@ -59,7 +72,7 @@ function DataGenerator(id, datajson)
     return data;
 }
 
-function HTMLGenerator(id, jsonData)
+function HTMLGenerator(id, modificate)
 {
     console.log("id =", id, json)
     let data1 = findByID(id, json);
@@ -69,7 +82,7 @@ function HTMLGenerator(id, jsonData)
     let title = "<div>" + data + "</div>";
     if(id != json.length)
         data = DataGenerator(id, data1);
-    let fp = questPath + "quest" + data1[0].id + ".html"; //file path
+    let fp = fullParamPath + "\\quest" + data1[0].id + ".html"; //file path
     let file = htmlwb4_start + title + data + htmlwb4_end;
     fs.writeFile(fp, file, (err) => {
         if(err) throw err;
@@ -77,7 +90,7 @@ function HTMLGenerator(id, jsonData)
     });
     if(id != json.length)
     {
-        fp = questPath + "\\the-end" + data1[0].id + ".html"; //file path
+        fp = fullParamPath + "\\the-end" + data1[0].id + ".html"; //file path
         title = "<div>" + json[id].end + "</div>";
         file = htmlwb4_start + title + htmlwb4_end;
         fs.writeFile(fp, file, (err) => {
@@ -131,14 +144,16 @@ function Modificate()
     i = 0;
     while(i < logJSON[0].mid.length)
     {
-        HTMLGenerator(logJSON[0].mid[i]);
+        HTMLGenerator(logJSON[0].mid[i], true);
         i++;
     }
     fp = JSONPath + "log.json"; //file path
+    
     fs.writeFile(fp, JSON.stringify(logJSON), (err) => {
         if(err) throw err;
-        console.log('Data has been updated!');
+        console.log('Data in log file has been updated!');
     });
+
 }
 
 
@@ -154,7 +169,7 @@ fs.stat(paramJSON, function(err, stats) {
     console.log(typeof(logJSON));
     let mtime = stats.mtime.toISOString();
     console.log(mtime, logJSON[0].mtime);
-    if(mtime != logJSON[0].mtime)
+    if(paramServe)
     {
         logJSON[0].mtime = mtime;
         logJSON[0].mid = [];
@@ -166,9 +181,13 @@ fs.stat(paramJSON, function(err, stats) {
         let i = 0;
         while(i < json.length)
         {
-            HTMLGenerator(i);
+            HTMLGenerator(i, false);
             i++;
         }
     }
 });
+//NOTE: По красоте надо добавить функционал, проверки существует ли log файл, и если же существует, то проверять пустой ли он или нет, если пустой, то заполнить "по формату" моего log.json
+
+
+
 //"C:\\Users\\WartVader\\Desktop\\Tasks 2020\\1\\index.js"
