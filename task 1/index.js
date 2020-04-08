@@ -20,6 +20,31 @@ else
 console.log(fullParamPath);
 
 
+//
+var execProcess = require("./exec_process.js");
+execProcess.result("git add -A", function (err, response) {
+if (!err) {
+console.log(response);
+} else {
+console.log(err);
+}
+});
+execProcess.result('git commit -m "Some message"', function (err, response) {
+if (!err) {
+console.log(response);
+} else {
+console.log(err);
+}
+});
+execProcess.result("git push", function (err, response) {
+if (!err) {
+console.log(response);
+} else {
+console.log(err);
+}
+});
+
+//
 const htmlwb4_start = '<!doctype html>' + '\n' +
 '<html lang="rus">' + '\n' +
   '<head>' + '\n' +
@@ -60,9 +85,9 @@ function DataGenerator(id, datajson)
         while(i < datajson[0].answers.length)
         {
             if(i == 0)
-            data += '<div><a href=".\\quest\\quest' + (datajson[0].id + 1) + '.html' + '">' + datajson[0].answers[i].text + '</a></div>' + '\n';
+            data += '<div><a href=".\\quest' + (datajson[0].id + 1) + '.html' + '">' + datajson[0].answers[i].text + '</a></div>' + '\n';
             else
-            data += '<div><a href=".\\quest\\the-end' + datajson[0].id + '.html">' + datajson[0].answers[i].text + '</a></div>' + '\n';
+            data += '<div><a href=".\\the-end' + datajson[0].id + '.html">' + datajson[0].answers[i].text + '</a></div>' + '\n';
     
             i++;
         }
@@ -78,8 +103,8 @@ function HTMLGenerator(id, modificate)
     let data1 = findByID(id, json);
     if (data1[0] == false)
     return false;
-    let data;
-    let title = "<div>" + data + "</div>";
+    let data = data1[0].question;
+    let title = "<div>" + data1[0].question + "</div>";
     if(id != json.length)
         data = DataGenerator(id, data1);
     let fp = fullParamPath + "\\quest" + data1[0].id + ".html"; //file path
@@ -91,7 +116,7 @@ function HTMLGenerator(id, modificate)
     if(id != json.length)
     {
         fp = fullParamPath + "\\the-end" + data1[0].id + ".html"; //file path
-        title = "<div>" + json[id].end + "</div>";
+        title = "<div>" + data1[0].end + "</div>";
         file = htmlwb4_start + title + htmlwb4_end;
         fs.writeFile(fp, file, (err) => {
             if(err) throw err;
@@ -120,7 +145,10 @@ function findByID(id, jsonData)
     return [false];
 }
 
-
+function HTMLRender(location)
+{
+    document.location.href = "location";
+}
 
 function Modificate()
 {
@@ -178,8 +206,8 @@ fs.stat(paramJSON, function(err, stats) {
     }
     else 
     {
-        let i = 0;
-        while(i < json.length)
+        let i = 1;
+        while(i <= json.length)
         {
             HTMLGenerator(i, false);
             i++;
