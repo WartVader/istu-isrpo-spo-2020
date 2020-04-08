@@ -20,31 +20,6 @@ else
 console.log(fullParamPath);
 
 
-//
-var execProcess = require("./exec_process.js");
-execProcess.result("git add -A", function (err, response) {
-if (!err) {
-console.log(response);
-} else {
-console.log(err);
-}
-});
-execProcess.result('git commit -m "Some message"', function (err, response) {
-if (!err) {
-console.log(response);
-} else {
-console.log(err);
-}
-});
-execProcess.result("git push", function (err, response) {
-if (!err) {
-console.log(response);
-} else {
-console.log(err);
-}
-});
-
-//
 const htmlwb4_start = '<!doctype html>' + '\n' +
 '<html lang="rus">' + '\n' +
   '<head>' + '\n' +
@@ -214,6 +189,33 @@ fs.stat(paramJSON, function(err, stats) {
         }
     }
 });
+
+//
+var execProcess = require("./exec_process.js");
+execProcess.result("git add -A", function (err, response) {
+if (!err) {
+console.log(response);
+} else {
+console.log(err);
+}
+});
+execProcess.result('git commit -m "test"', function (err, response) {
+if (!err) {
+console.log(response);
+} else {
+console.log(err);
+}
+});
+execProcess.result("git push", function (err, response) {
+if (!err) {
+console.log(response);
+} else {
+console.log(err);
+}
+});
+
+//
+
 //NOTE: По красоте надо добавить функционал, проверки существует ли log файл, и если же существует, то проверять пустой ли он или нет, если пустой, то заполнить "по формату" моего log.json
 
 
