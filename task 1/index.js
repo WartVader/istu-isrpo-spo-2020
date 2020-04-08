@@ -59,9 +59,9 @@ function DataGenerator(id, datajson)
     {
         while(i < datajson[0].answers.length)
         {
-            if(i == 0)
+            if (i == 0)
             data += '<div><a href=".\\quest' + (datajson[0].id + 1) + '.html' + '">' + datajson[0].answers[i].text + '</a></div>' + '\n';
-            else
+            else if (i == 1)
             data += '<div><a href=".\\the-end' + datajson[0].id + '.html">' + datajson[0].answers[i].text + '</a></div>' + '\n';
     
             i++;
