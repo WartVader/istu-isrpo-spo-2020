@@ -120,11 +120,6 @@ function findByID(id, jsonData)
     return [false];
 }
 
-function HTMLRender(location)
-{
-    document.location.href = "location";
-}
-
 function Modificate()
 {
     let i = 0;
