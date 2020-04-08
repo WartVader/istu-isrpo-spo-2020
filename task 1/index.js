@@ -204,7 +204,7 @@ function git()
                 console.log(response);
                 execProcess.result("git push", function (err, response) {
                 if (!err) {
-                    console.log("Запушено");
+                    console.log("Data has been pushed");
                 } else {
                     console.log(err);
                 }
