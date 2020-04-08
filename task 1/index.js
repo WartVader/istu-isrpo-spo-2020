@@ -193,29 +193,29 @@ fs.stat(paramJSON, function(err, stats) {
 
 function git()
 {
-
     var comand = 'git commit -m "test"';
 
 
     var execProcess = require("./exec_process.js");
-execProcess.result("git add -A", function (err, response) {
-if (!err) {
-execProcess.result(comand, function (err, response) {
-if (!err) {
-console.log(response);
-execProcess.result("git push", function (err, response) {
-if (!err) {
-console.log("Запушено");
-} else {
-console.log(err);
-}
-});
-} else {
-console.log(err);
-}
-});
-}
-});
+    execProcess.result("git add -A", function (err, response) {
+        if (!err) {
+            execProcess.result(comand, function (err, response) {
+            if (!err) {
+                console.log(response);
+                execProcess.result("git push", function (err, response) {
+                if (!err) {
+                    console.log("Запушено");
+                } else {
+                    console.log(err);
+                }
+                });
+            } 
+            else {
+                console.log(err);
+            }
+            });
+        }
+    });
     
 }
 //
