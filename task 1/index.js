@@ -98,7 +98,7 @@ function HTMLGenerator(id, modificate)
         data = DataGenerator(id, data1);
         
     }
-    console.log(data);
+    console.log(id);
     let fp = fullParamPath + "\\quest" + data1[0].id + ".html"; //file path
     let file = htmlwb4_start + title + data + htmlwb4_end;
     console.log(file);
