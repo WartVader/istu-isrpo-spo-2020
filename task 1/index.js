@@ -51,7 +51,7 @@ var logJSON = JSON.parse(fs.readFileSync(JSONPath + "log.json", "utf8"));
 MainHTMLGenerator();
 function MainHTMLGenerator()
 {
-    let href = './' + paramPath;
+    let href = './' + paramPath + '/' + 'quest1.html';
     let a = '<a name="" id="" class="btn btn-primary" href="' + href + '" role="button"> Start</a>';
     file = htmlwb4_start + a + htmlwb4_end;
     let fp = __dirname + "\\index.html"; //file path
