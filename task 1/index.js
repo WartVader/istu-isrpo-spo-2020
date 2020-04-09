@@ -48,6 +48,18 @@ const htmlwb4_end = '   </div>' + '\n' +
 var json = JSON.parse(fs.readFileSync(JSONPath + "quest.json", "utf8"));
 var logJSON = JSON.parse(fs.readFileSync(JSONPath + "log.json", "utf8"));
 //console.log(json);
+MainHTMLGenerator();
+function MainHTMLGenerator()
+{
+    let href = './' + paramPath;
+    let a = '<a name="" id="" class="btn btn-primary" href="' + href + '" role="button"> Start</a>';
+    file = htmlwb4_start + a + htmlwb4_end;
+    let fp = __dirname + "\\index.html"; //file path
+    fs.writeFile(fp, file, (err) => {
+        if(err) throw err;
+        console.log('Data has been added!');
+    });
+}
 
 function DataGenerator(id, datajson)
 {
