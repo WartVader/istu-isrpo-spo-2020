@@ -96,6 +96,7 @@ function HTMLGenerator(id, modificate)
         data = DataGenerator(id, data1);
     let fp = fullParamPath + "\\quest" + data1[0].id + ".html"; //file path
     let file = htmlwb4_start + title + data + htmlwb4_end;
+    console.log(file);
     fs.writeFile(fp, file, (err) => {
         if(err) throw err;
         console.log('Data has been added!');
