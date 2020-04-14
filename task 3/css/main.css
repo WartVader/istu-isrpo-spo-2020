@@ -1,0 +1,6 @@
+@import 'theme.css';
+
+body {
+  color: red;
+  background: url('../images/bg.jpg')
+}

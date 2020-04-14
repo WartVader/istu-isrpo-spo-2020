@@ -1,0 +1,118 @@
+[
+    { 
+       "name": "player",
+       "fields": [
+            {
+                "name":  "name",
+                "type":  "string"
+            },
+            {
+                "name":  "age",
+                "type":  "integer"
+            }      
+       ],
+       "data": [
+            {
+                "id": 1,
+                "name": "Mik'e",
+                "age":  20
+            },
+            {
+                "id": 2,
+                "name": "John",
+                "age": 32
+            },
+            {
+                "id": 3,
+                "name": "Tom",
+                "age": 23
+            }
+        ]
+    },
+    {
+       "name": "game",
+       "fields": [
+            {
+                "name": "created_at",
+                "type": "datetime"
+            },
+            {
+                "name": "mode",
+                "type": "string"
+            }
+       ],
+       "data": [
+            {
+                "id": 1,
+                "created_at": "2020-02-05T09:04:00",
+                "mode": "deathmatch"
+            },
+            {
+                "id": 2,
+                "created_at": "2020-01-03T10:06:00",
+                "mode": "team"
+            }
+            ,
+            {
+                "id": 3,
+                "created_at": "2020-01-03T10:06:00",
+                "mode": "team"
+            }
+       ]
+    },
+    {
+       "name": "player_in_game",
+       "fields": [
+            {
+                "name": "player_id",
+                "link": "player"
+            },
+            {
+                "name": "game_id",
+                "link": "game"
+            },
+            {
+                "name": "is_winner",
+                "type": "bool"
+            }
+       ],
+       "data": [
+            {
+                "id": 1,
+                "player_id": 1,
+                "game_id": 1,
+                "is_winner": true
+            },
+            {
+                "id": 2,
+                "player_id": 2,
+                "game_id": 1,
+                "is_winner": false
+            },
+            {
+                "id": 3,
+                "player_id": 1,
+                "game_id": 2,
+                "is_winner": true
+            },
+            {
+                "id": 4,
+                "player_id": 2,
+                "game_id": 2,
+                "is_winner": false
+            },
+            {
+                "id": 5,
+                "player_id": 3,
+                "game_id": 2,
+                "is_winner": false
+            },
+            {
+                "id": 6,
+                "player_id": 4,
+                "game_id": 2,
+                "is_winner": true
+            }          
+       ]
+    }
+  ]
